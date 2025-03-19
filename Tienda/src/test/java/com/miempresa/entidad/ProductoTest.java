@@ -35,7 +35,7 @@ class ProductoTest {
 		double precioEsperado = -3.0;
 		String mensajeEsperado = "El precio no puede ser negativo: " + precioEsperado;
 		
-		assertEquals(mensajeEsperado, producto.getPrecio());
+		assertEquals(mensajeEsperado, exception.getMessage());
 	}
 	
 	@Test
@@ -44,8 +44,26 @@ class ProductoTest {
 		String nombreEsperado = "Monitor";
 		producto.setNombre("Monitor");
 		
-		assertEquals(nombreEsperado, producto.getNombre(), "El nombre no se ha modificado correctamente desde el método set");
+		assertEquals(nombreEsperado, producto.getNombre());
 	}
 	
+	@Test
+	@DisplayName("Deberia modificar el precio del producto")
+	void testModificarPrecioProducto() {
+		double precioEsperado = 50;
+		producto.setPrecio(50);
+		
+		assertEquals(precioEsperado, producto.getPrecio());
+	}
+	
+	@Test
+	@DisplayName("Deberia lanzar una excepción al intentar establecer un precio negativo")
+	void testModificarPrecioNegativo() {
+		Exception exception = assertThrows(IllegalArgumentException.class, ()->producto.setPrecio(-50));
+		double precioEsperado = -50;
+		String mensajeEsperado = "El precio no puede ser negativo: " + precioEsperado;
+		
+		assertEquals(mensajeEsperado, exception.getMessage());
+	}
 
 }

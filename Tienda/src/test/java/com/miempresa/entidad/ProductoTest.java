@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 class ProductoTest {
 	
-	Producto producto;
+	private Producto producto;
 
 	@BeforeEach
 	void setUp() throws Exception {
